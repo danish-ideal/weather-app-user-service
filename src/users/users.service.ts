@@ -14,10 +14,9 @@ export class UsersService {
             userData.password = await bcrypt.hash(userData.password,saltRound)
             return await this.userService.create(userData)
         } catch (error) {
-            console.log(error);
             throw new RpcException({
-                statusCode: 500,
-                message: ` ${error.message}`,
+                statusCode: 409,
+                message: ` ${'The user already exists'}`,
               });    
         }
      
